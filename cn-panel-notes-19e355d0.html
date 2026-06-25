@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>ng28 信息索引 · 资料整理</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans SC', sans-serif;
+            background-color: #f5f7fb;
+            color: #1e2a3e;
+            line-height: 1.65;
+        }
+
+        /* ── hero 深色头图 ── */
+        .hero {
+            background: linear-gradient(145deg, #111827 0%, #1f2937 80%);
+            padding: 4rem 1.5rem 3.5rem;
+            text-align: center;
+            color: #e5e7eb;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -40%;
+            left: -20%;
+            width: 60%;
+            height: 120%;
+            background: radial-gradient(circle at 30% 50%, rgba(99, 102, 241, 0.08), transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-title {
+            font-size: 2.2rem;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title em {
+            font-style: normal;
+            color: #a5b4fc;
+            font-weight: 600;
+        }
+
+        .hero-sub {
+            margin-top: 1.2rem;
+            font-size: 1.05rem;
+            max-width: 640px;
+            margin-left: auto;
+            margin-right: auto;
+            color: #cbd5e1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-sub a {
+            color: #c4b5fd;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 1px;
+            transition: color 0.2s;
+        }
+
+        .hero-sub a:hover {
+            color: #ddd6fe;
+        }
+
+        /* ── 容器 ── */
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 1.25rem;
+        }
+
+        /* ── 浅色正文区 ── */
+        .content-section {
+            background: #ffffff;
+            margin: 2rem auto 1.5rem;
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.02);
+        }
+
+        .section-label {
+            display: inline-block;
+            background: #eef2ff;
+            color: #4f46e5;
+            font-size: 0.775rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            padding: 0.25rem 0.9rem;
+            border-radius: 40px;
+            margin-bottom: 1.2rem;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            color: #0f172a;
+            letter-spacing: -0.3px;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+        }
+
+        .text-muted {
+            color: #475569;
+            font-size: 0.95rem;
+        }
+
+        a {
+            color: #4f46e5;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            transition: background 0.15s, color 0.15s;
+            text-decoration-thickness: 1px;
+        }
+
+        a:hover {
+            color: #3730a3;
+            background: #f1f5ff;
+            border-radius: 2px;
+        }
+
+        /* ── 优势卡片 ── */
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.2rem;
+            margin: 1.8rem 0 0.5rem;
+        }
+
+        .advantage-card {
+            background: #f8faff;
+            border-radius: 16px;
+            padding: 1.4rem 1.2rem;
+            border: 1px solid #e9edf5;
+            transition: box-shadow 0.2s;
+        }
+
+        .advantage-card:hover {
+            box-shadow: 0 6px 14px rgba(79, 70, 229, 0.04);
+        }
+
+        .advantage-card .icon {
+            font-size: 1.7rem;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .advantage-card h3 {
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin-bottom: 0.4rem;
+            color: #1e293b;
+        }
+
+        .advantage-card p {
+            font-size: 0.9rem;
+            color: #475569;
+            margin-bottom: 0;
+        }
+
+        /* ── 说明区 / 场景 ── */
+        .info-block {
+            background: #f9fafc;
+            border-left: 3px solid #a5b4fc;
+            padding: 1.4rem 1.6rem;
+            border-radius: 12px;
+            margin: 1.8rem 0;
+        }
+
+        .info-block p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ── FAQ 摘要 ── */
+        .faq-item {
+            border-bottom: 1px solid #edf2f7;
+            padding: 1.1rem 0;
+        }
+
+        .faq-item:last-of-type {
+            border-bottom: none;
+        }
+
+        .faq-q {
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 0.2rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .faq-q::before {
+            content: '▸';
+            color: #4f46e5;
+            font-weight: 400;
+        }
+
+        .faq-a {
+            color: #475569;
+            font-size: 0.95rem;
+            padding-left: 1.2rem;
+        }
+
+        /* ── 底部 ── */
+        .site-footer {
+            text-align: center;
+            padding: 2.5rem 1.25rem 3rem;
+            color: #64748b;
+            font-size: 0.85rem;
+            border-top: 1px solid #e6edf4;
+            margin-top: 2rem;
+            background: #ffffff;
+        }
+
+        .site-footer a {
+            color: #4f46e5;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.8rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links span {
+            opacity: 0.6;
+            font-size: 0.8rem;
+        }
+
+        /* ── 响应式 ── */
+        @media (max-width: 640px) {
+            .hero {
+                padding: 3rem 1.2rem 2.8rem;
+            }
+            .hero-title {
+                font-size: 1.7rem;
+            }
+            .content-section {
+                padding: 1.8rem 1.2rem;
+                border-radius: 16px;
+            }
+            .advantages-grid {
+                grid-template-columns: 1fr;
+                gap: 0.9rem;
+            }
+            .info-block {
+                padding: 1rem 1.2rem;
+            }
+            .footer-links {
+                gap: 1rem;
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .content-section {
+                padding: 3rem 2.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- hero 深色头图 -->
+    <header class="hero">
+        <h1 class="hero-title">资料索引 · <em>ng28</em> 信息整理</h1>
+        <p class="hero-sub">
+            从文档与公开资料出发，围绕平台定位、功能边界与常见问题，为浏览者提供一份克制、可靠的信息导航。关于 <a href="https://cn-panel-ng28.com">ng28</a> 的说明与链接均基于此页。
+        </p>
+    </header>
+
+    <div class="container">
+
+        <!-- 优势区 卡片 -->
+        <section class="content-section">
+            <span class="section-label">📋 整理优势</span>
+            <h2>结构化的信息索引</h2>
+            <p class="text-muted">
+                面对碎片化的网络内容，一份经过筛选、归类的索引能减少反复查找的消耗。本页围绕 <a href="https://cn-panel-ng28.com">ng28</a> 整理了几个常用模块，每个模块均来自公开可查的资料或界面描述，力求真实、不夸大。
+            </p>
+
+            <div class="advantages-grid">
+                <div class="advantage-card">
+                    <div class="icon">📂</div>
+                    <h3>分类明确</h3>
+                    <p>按功能、场景、常见问题划分，快速定位所需条目，避免信息过载。</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="icon">🔗</div>
+                    <h3>链接直达</h3>
+                    <p>每个模块都对应可操作的页面或说明段落，降低跳转与理解的摩擦。</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="icon">🔄</div>
+                    <h3>持续微调</h3>
+                    <p>根据公开界面与文档变动，不定期调整章节内容，保持索引的有效性。</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="icon">📄</div>
+                    <h3>轻量阅读</h3>
+                    <p>不堆砌术语，段落精简，便于在手机与电脑上快速扫读。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 说明区 + 场景 -->
+        <section class="content-section">
+            <span class="section-label">🧭 说明与场景</span>
+            <h2>常见的使用情境</h2>
+            <p>
+                根据现有界面与资料，<a href="https://cn-panel-ng28.com">ng28</a> 所涉及的场景主要集中在后台管理、数据查看、配置调整等方面。以下列举几个典型的使用方向，供初次接触的人参考。
+            </p>
+
+            <div class="info-block">
+                <p><strong>▶ 信息聚合与查询</strong><br>
+                通过面板式的界面，将分散的数据（如统计、记录、状态）汇总于一处，减少在多个页面间切换的频率。对于需要定期核对信息的用户，这种聚合方式能节省一定的时间。</p>
+            </div>
+
+            <div class="info-block">
+                <p><strong>▶ 基础配置与调整</strong><br>
+                部分模块提供选项式的设置入口，支持修改参数、切换模式或更新偏好。操作反馈直观，适合对后台管理有一定了解的使用者。</p>
+            </div>
+
+            <div class="info-block">
+                <p><strong>▶ 多条目管理</strong><br>
+                当需要同时处理多条记录或项目时，列表、筛选、批量操作等功能可协助提升效率。设计上倾向于简洁，避免过多视觉干扰。</p>
+            </div>
+
+            <p class="text-muted" style="margin-top: 1.2rem;">
+                以上描述基于公开界面的常见模式，具体功能可能因版本或权限有所差异。建议以实际页面显示为准。
+            </p>
+        </section>
+
+        <!-- FAQ 摘要 -->
+        <section class="content-section">
+            <span class="section-label">❓ FAQ 摘要</span>
+            <h2>常见疑问 · 简明回答</h2>
+
+            <div class="faq-item">
+                <div class="faq-q">如何找到某个具体功能？</div>
+                <div class="faq-a">可先查看导航栏或侧边菜单的分类标签；若仍无法定位，可使用页面内的搜索框（如有）。多数模块的名称与功能直接对应。</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">页面加载较慢或显示异常怎么办？</div>
+                <div class="faq-a">建议检查网络连接，或尝试刷新页面、清除浏览器缓存。部分功能依赖现代浏览器，请确保使用最新版本。</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">信息是否会实时更新？</div>
+                <div class="faq-a">面板中的数据刷新频率取决于具体模块的设计，部分页面需要手动刷新或设置自动更新间隔。详情可查阅对应页面的帮助说明。</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">可以自定义界面布局吗？</div>
+                <div class="faq-a">在允许范围内，部分面板支持简单的卡片排序或显示项调整。具体定制能力请以实际页面提供的选项为准。</div>
+            </div>
+
+            <p class="text-muted" style="margin-top: 1.2rem;">
+                更多细节与最新说明，可参考相关文档或直接浏览 <a href="https://cn-panel-ng28.com">ng28</a> 页面。
+            </p>
+        </section>
+
+    </div>
+
+    <!-- 底部链接区 -->
+    <footer class="site-footer">
+        <div class="footer-links">
+            <span>资料索引页 · 持续修订</span>
+            <a href="https://cn-panel-ng28.com">ng28</a>
+            <span>仅作信息整理</span>
+        </div>
+        <div>
+            <span style="opacity: 0.6;">基于公开资料 · 无夸大或承诺</span>
+        </div>
+    </footer>
+
+</body>
+</html>
